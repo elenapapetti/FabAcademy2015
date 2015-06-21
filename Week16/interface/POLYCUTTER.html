@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<!-- saved from url=(0046)http://www.my-id.org/utilities/Polycutter.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<!-- <meta charset='ISO-8859-1'> -->
+<title>POLYCUTTER</title>
+<script type="text/javascript" src="./POLYCUTTER_files/jquery-1.11.0.js"></script><style type="text/css"></style>
+
+<style type="text/css">
+
+
+* {
+    margin: 0;
+    padding: 0;
+   
+}
+
+body{
+margin:0px;
+background:#FFF;
+text-align:center;
+color: #666;
+font-family: courier;
+
+}
+
+
+
+#loadingMessage{
+visibility:hidden; 
+}
+
+#Response_Frame{
+ margin: auto;
+ background:#FFFFC2;
+ border:2px solid #EEE;
+ color: #666;
+ /*-webkit-border-radius: 15px;
+ border-radius: 15px;*/
+ 
+}
+
+
+
+
+#header {
+
+    background:#00bddd;
+    color: #666;
+    width:100%;
+	height:100px;
+	position:relative;
+  font-family: courier;
+	top:0;
+	left:0;
+
+}
+
+
+#footer{
+    background:#1c252c;
+    color: #666;
+    width:100%;
+	height:80px;
+	position:absolute;
+  font-family: courier;
+	bottom:0;
+	left:0;
+}
+
+table{
+     margin: auto;
+     background:#8e9399;
+     border:2px solid #EEE;
+     color: white;
+    /* -webkit-border-radius: 15px;
+     border-radius: 15px;*/
+}
+
+.file {padding:5px 15px; background:#00bddd; border:0 none;
+cursor:pointer;
+color : white;
+font-family: courier;
+font-size:70%;
+/*-webkit-border-radius: 5px;
+border-radius: 5px; */}
+
+
+
+
+button {padding:5px 15px; background:#00bddd; border:0 none;
+cursor:pointer;
+color : white;
+font-family: courier;
+/*-webkit-border-radius: 5px;
+border-radius: 5px; */}
+
+input {padding:5px 15px; background:#00bddd; border:0 none;
+cursor:pointer;
+color : white;
+font-family: courier;
+/*-webkit-border-radius: 5px;
+border-radius: 5px; */}
+
+
+</style>
+</head>
+
+<body><header>
+<div id="header">
+   <h1>POLYCUTTER FABACADEMY2015</h1> <br>
+   <h1><a href="https://www.fablabs.io/fablabfrosinone">OFFICINE GIARDINO - FROSINONE ITALY</a></h1>
+   </div>
+</header>
+
+
+    
+
+
+<table id="tabellaP">
+ <tbody><tr>
+  <td>
+    <a href="http://127.0.0.1:27272/setPosition?position=[0,0,0,0]" target="Response_Frame">
+    <button type="submit" id="home">SET HOME</button></a>
+</td></tr></tbody></table>
+<img width="253" height="253" title="" alt="" usemap="#Map" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAP0AAAD9AgMAAAAKW5lvAAAADFBMVEUAAACAgIDAwMD///8Gn2aKAAANJklEQVR42p2bvYskxxXAe3YtTTDBBkZS4GDACmyEoEEgcKBTz12iwMGtsWWMFWxocLL/gKQZbIyNL5gLBA4crDE4kYMDRxfIdOPkDBNozGE2OLCGG5lFiubmZpdeubvLVV1Vr9579bF7u3C3u7M9v6r69auv1zXZ5fuRrw+E+4pfVGXLLPZVOkAVvajKZtG/TeU7P8kGijOJXjTJ4n8rhNjJb8MkIEsDZqYmN6tBKZrsVfFVNjKgFwW8LMRqIPR/X6YAQxH9mozlf21vM/y1SwNafSdn45sCdnv62/CmgKUuuh3cFDCZ0u8vCoCSl+ObAaDtcQlpABQcl5AGuKZ7EorrAFC5XEIzDwEWMQW+hO06BPhuTIEvYVEHAM3DMqbAk5B3hQ/Y/iePKeASmlLMfcC9Hy9iCriErRBrD9C9+XAbU8AlyJIuPUD9t+6dMqaA/SbbaiQgwHohTo6jZZL6tKqgOQfMc7F+Em01+bVv6poBug9LUZ8Hitz6Fepl1wxwKS/sbgXu/D9LT0J/u7UEBzhV2PmRryDPuYSm7NRIP6eAI3Xd+tRrc1ve4xJkXT+9ayQAoP1Q1RRJcAo8Caqu4wsdCQA47y9DEmyTFypuqQRZ13a61RIAcKrDGCQ4BcaZq5MC1uVWSwDAkb4KJNgWq6uf0JdUXZ+12UEvwQK0AiQBR8EFrZSq6+Puzw/6SLCAc2Oqe3fKFagGk9dUXe8pclc4wKntyfMTT4FsH65V73TcV23uAMd2LFmvmYInrcRjCeqdXTb8n+4OBtB+ZjtyXTMFpzvZQCyhkvrEpw8kPMsAcKFa9NEvzkCCU/D0mZhSCZ2pbf/dNuG5/PnN7cLOGEjB+Vq+RCTUJYpIDPjN5YkFoCiofytfIhLslNC3DAMeN7kFoChoD75+g0qAHqtahgH/6IO7YFHQjZcDEgmtGxeOKOBnACBRkKuXTpwENGqtCaC79bEF4I6gAWdOAl41U0A5nRoAGQ57QB1bJ+AmuIkfdwRx7AbAwDohCIByVB37r42KvuBiKQhwo9+FDfDYOiEMcMXY4aWbxhZLQYBr6JH3A5dgARu0R3ClQMFQFU9CaJHl2nkpuAxPQgjgClnjJUlYQgjgmrkQdDoMSAgAUBkoaA8iEgKAxOYgtGzwAfGVeUhCABDfG4T+7gPaLP1+VkMfsMuKKwDDNGDphEeaMEgDJpP9tMSM7CI9QDvYpCXsssNxCrAbNmkJywFdQ3OAdJyWMBmSSPAA8i5X+0kFYxIJHKDoSQk7qRBHAgeo9iUlyGmKdAcO6OEpCf2CahAH9M1LSFAKSHdgAM1OSNj1UYQkMIBuXULCcsA3lBRg0HEJ+lokgQFM46IStAIsgQIsOSphZzqSk0ABsC6ISVgO+MBIAQCOSbCXOgkUAE2LSLAK0JUE4LgRCTsYS6CuBOBaFpGwHPjZFQxAAQYSvjnMBh9wBaiyBIBC3Eq47Oe173AF7loMwJ3MSOhMpm/MFLjaYgDu5kbC/WzwS/H1oc6KIgXuYgwgU06W93XW77yvG8GHLg4gk16V95PMMZ5MsrE/RSIAnXZ3almtdsjG5ZjnJZdjDvDXBSuXWJ5JejcIrBMQwF8XoDbXqvQ/BtYJCOCtC0iVJ6PwOsEB/IX4at9PjnoSHMBXQFKxnZfZ1W9wAE8BSwZ7mV1dZQfwdwK00pthUILLYPgKDlKrM1tnAAQUsCFhUoYkAMCPAj4oLfOQBAB4Chp+3zbBSIAMhr8d49fX+yEJFuAr8NrUDULLZgWYDUMKKm/F61lU1a4loBqFFsgTf0wuAhKabJatcqSgEBrVebEvNraWxzYtLevd7VUZjoKmqPUfW39u2tnIGokDFAk9ABRsi6caUHs3TTS2lLfE91Ak9ABQcK+YF7S+4nNwZit1a/oDFAkKAAq6/NZUA1YQd69DFexVxdG7TkIPAAV1+bYRBHexeeh6hwWcFnOcT0AKnorXDGAG2ceu4KEhRa+dBAUABXOdbpBft2Hv+MWcB0LRFTVaWmdIAWRhBIRB/m3Yv25y2J93ToIE1EO8V+7/1FnjzWcPXfJg7JIcToIEwNhzBoDWMrcXnVUu6gMHsBL2FKAqcJag/6WxcbRYiBMrwb5YoJxGpgCz0mWmDMAWprLK6zULxQJlZaqpBAxQbswm0w6sgtJmCF27CuEkrPIqgxA9RQCbSVJ5QivBmi1QbmEzrjLoJEcIkIMCWZiVgAG1FVtltr1KQWn+bG95n1gHCRhgJDTDKrPVPRc7lajQgAIUCCdhDz/lmhsvVWZ77qloPpqaP68KUIAk3LaAEiR0+xKQWwXd90sKWOgsio0EC+jyRyBBDmmmuurByY8EBZhnC1YC1ODu3c5KcACVKvo1AKZOgZMAgEfj2kq4U2W2uvLfry6PTFJ16hQ4CQD4l+rPulq3oQbq91coYAEJ8zkFbMraJv3vAEC+1L5jJWpADgnzMwb4OBvqTCVyIKU0fy+wg4YnzAHwb9mEtgRAbsezczHGd+ECnr2ZhDkA7kmJJru77yJxjeJMi6WZVgQY36tN12v3XV+o0bWbIOCO+aUtTm3XU6FsBxoTGagzcQDuCybB3YzQeDDn3ZkDcG88tzNulcFMvuYDCgOQAeXUDvVySJuQ5G8cQIY0+8ihUKPyFEtAg2oCAPn+Us0LYywBDesMgIf1S1h5SQBMzmtWGAPgicWk++shmRtrB9gPAPDUdgILajU7Z9Pw5MoAgcl1lveAahye3hlgZad3Yaf3Tm7LFGDjJIzwAgMnzKGP4wVGvacXGI2T8BZf4uANgOndciVnHqOuRmaV5iTYRdYykECARdb83RwUaICTUBzxZZ5bbe/BMs88Y1cKNMBJkCuwKxeab8uGggIJkNtkJ8EudZthfKn7mhg5Be9VWXWAJZg7nFps58IpaNSZrCGS8CLLfaWgto9I/E3b9MpXlAK75WkGV295vNySUgC7Nn9rzG9D4+0gVBQAwJNw9bavjwIAeBK6KzeefRQAwJfAnXn7MqUA7d49CcurNt+znAA8CWz7v9sPKUAAT0KblckERK8AAQIS0imQXgHO4vhXkOcIYQUY4EcCRs6CUUAAgSSJe9OlSs79wVeAAVTCl1OViytJMpRY1QpINo9IUBmU1qYyzU9Z7ikgACyh6wfy+5Z5vy8cp8OMAgLAEvrkm2z5S/1ln+i84HLPU0APdSEJq4Ep+aVj8c1PMmvcU0CzukjCbGgfa6G0boskGAUU4CR0Nvv53/79r3r31SqgACehhsp8Ncm+9XO4mftcAQU4CatBJLdeMgUsuw/lzoaR7H7OFDCAldBl48jzhRFTwABWQh07mGojARQwgJWwGkSfsTAF/CmPKXkWPfJoJIACDtASogqsBKeAA7SEOn42V0eCU8ABWsIqdTC2JAq8p3192bPU6d+cKPAASkJCgZaAFHgAJSGhQEcCUuABlISEAh0JSIH/1FeWPksdQFASkAIfUI2TCpQErMAHbIZJBSoSsAIf0AySCtQ7/jRKAUTyELkeJvMkoEorUGfoyyRgk1ZAZ4cQAM8OoXMoJAqCp0BQDebu1WNvRogC0BR55tRNvRkhCkBT5Hngp5qtvTDgcy7BlXsWUUABr3sSoOUnEQXsyLUnYSFIbsJXQI9cm8uQBJuFgfNMXAEBLL44YRLUubQnKt0D59K4AgKAFHQ2RXHweGf2SUEF5IknpKBBwhryabYNXAEGbLc25wYS+pOsj7EMrgADFgubcwMJ6lxa80N8O7gCDEApaJBwoo5YphTg1bpKQV8yCSoAc7mRb2MKEGB74RKPIOHcFH4hcL4gdELSpqBZJKjOkDMF7ricUusAJAUNEo404BgpqAWOdPfEk6SgQcKpUE++SBS4fiHwxpOmoIkEHgUwTjV442nyrzwS9IhAo2CNuxoAWAoaS+BRUOPODrt3m4K+9CXwjgDnJvHGc3tBU9Ag4cJT0B94VofX8IFnLwXtJJRhBY9YHOTszLaTcEyjwCq4S+OgV9Bvr71IWHgKCvCakzPbojt0KWgnYeuNBXN7e3EcPId4KdgU2ZR8LOhP3Iv3aRw8h0RtwabILudjgWrkMwXgh761mIJPkb/jY4GS8NhOOwSQYwBIeOoNh1LC7/9q4gsD2jcwwMsnuOFQSpjsGWUEkGGAl09ww2GN5r3wketQPgENh2ZEyK8AsHwCnhHmbq5JAJgEPCOs3SiTADAJeEao3SiTAlTjsAIj4fhKAJFAJ8U5jDKhM9tBCXRSXMMok/xgHEkDkUmxhlEmCUAS2KQoJeTXACAJfF0wb8prAJAEvi4424prAJAEvi6oF9cCgARvXdDl1wK4xdJefAeUAoCE1ehmAJDgLY2uCzAS/KXRdQFGQlzBVQAjYTm6KcCkECd5GjCIf+p8+bLZscc+dX54xSeud9mR6CbD1KfOU4CpOqT5Sr/XvfGnzlfy24DuQV/sU+fdYdafs0zVoEp+8r77y4M+FhOfvN/FPtb/U3S7zmMXvVf9H4/4HLBJ8CA3AAAAAElFTkSuQmCC">
+	<map name="Map" id="Map">
+	<area alt="" title="Home" href="http://127.0.0.1:27272/move?position=[0,0,0,0]&velocity=1" target="Response_Frame" shape="poly" coords="87,125,99,100,124,87,155,99,167,125,155,156,126,166,98,156">
+	<area alt="" title="Homexy" href="http://127.0.0.1:27272/move?position=[0,0,None,None]&velocity=1" target="Response_Frame" shape="poly" coords="103,0,0,1,2,103">
+	<area alt="" title="homeZ" href="http://127.0.0.1:27272/move?position=[None,None,0,0]&velocity=1" target="Response_Frame" shape="poly" coords="1,150,1,250,103,250">
+	<area alt="" title="zup" href="http://127.0.0.1:27272/jog?incrementalPosition=[0,0,10,10]" target="Response_Frame" shape="poly" coords="252,102,251,3,152,2">
+	<area alt="" title="zdown" href="http://127.0.0.1:27272/jog?incrementalPosition=[0,0,-10,-10]" target="Response_Frame" shape="poly" coords="152,250,249,250,251,151">
+	<area alt="" title="xless" href="http://127.0.0.1:27272/jog?incrementalPosition=[-10,0,0,0]" target="Response_Frame" shape="poly" coords="79,90,59,69,8,127,59,181,79,159">
+	<area alt="" title="xplus" href="http://127.0.0.1:27272/jog?incrementalPosition=[10,0,0,0]" target="Response_Frame" shape="poly" coords="174,90,176,159,192,180,245,126,192,72">
+	<area alt="" title="yplus" href="http://127.0.0.1:27272/jog?incrementalPosition=[0,10,0,0]" target="Response_Frame" shape="poly" coords="69,60,128,8,184,61,162,81,92,79">
+	<area alt="" title="yless" href="http://127.0.0.1:27272/jog?incrementalPosition=[0,-10,0,0]" target="Response_Frame" shape="poly" coords="73,195,95,173,160,172,179,193,128,243">
+	</map>
+
+<table id="tabella">
+  <tbody><tr>
+
+
+    <td>
+      <div class="form-group">
+    <label for="fileToUpload" class="file">
+      <input type="file" name="fileToUpload" id="fileToUpload" style="display:none;">
+        Select File
+    </label>
+    <form action="http://www.my-id.org/utilities/upload.php" method="post" enctype="multipart/form-data">
+  
+  
+    <input type="submit" value="Upload File" name="submit">
+</form>
+
+</div>
+        
+
+    
+
+    </td>
+
+  </tr>
+
+
+ </tbody></table>
+
+
+
+
+<table id="tabellaC">
+  <tbody><tr>
+    <td>
+     <a href="http://127.0.0.1:27272/runfile?" target="Response_Frame">
+    <button type="submit" id="home">RUN</button></a>
+     
+    </td><td>
+      <a href="http://127.0.0.1:27272/disableMotors" target="Response_Frame">
+    <button type="submit" id="home">STOP</button></a>
+    </td>
+  </tr>
+
+ </tbody></table>
+
+ 
+
+
+
+<div id="loadingMessage">Wait Response...</div>
+<iframe name="Response_Frame" src="" id="Response_Frame" width="300" height="50">
+</iframe>
+<!--?-->
+
+<footer>
+<div id="footer">
+   <h1>POLYCUTTER Command Page <br>
+   to command a cnc machine realized following the <a href="http://www.fabacademy.org/archives/2015/doc/projects/gestalt-doc/index.html"> GESTALT project</a></h1>
+   </div>
+</footer></body></html>
