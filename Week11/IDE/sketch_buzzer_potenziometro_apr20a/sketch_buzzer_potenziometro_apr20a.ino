@@ -4,7 +4,7 @@ void setup(){   // initialize serial communications (for debugging only):
 
 void loop() {
   // read the sensor:
-  int sensorReading = analogRead(A2);
+  int sensorReading = analogRead(7);
   // print the sensor reading so you know its range
   Serial.println(sensorReading);
   // map the analog input range (in this case, 400 - 1000 from the photoresistor)
@@ -13,7 +13,7 @@ void loop() {
   // depending on the range your sensor's giving:
   int thisPitch = map(sensorReading, 0, 1023, 0, 4400);
   // play the pitch:
-  tone(A3, thisPitch);
+  tone(11, thisPitch);
   delay(500);        // delay in between reads for stability
-  noTone(A3); 
+  noTone(11); 
 }
